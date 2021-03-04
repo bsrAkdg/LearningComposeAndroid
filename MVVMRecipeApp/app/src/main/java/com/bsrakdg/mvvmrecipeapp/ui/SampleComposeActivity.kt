@@ -35,7 +35,7 @@ class SampleComposeActivity : AppCompatActivity() {
             // SetTextSpaceAndButton()
             // SetImage()
             // SetRow()
-            SetHamburgerRow()
+            // SetHamburgerRow()
         }
     }
 
