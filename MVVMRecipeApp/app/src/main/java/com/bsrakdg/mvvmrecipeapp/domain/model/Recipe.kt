@@ -1,4 +1,4 @@
-package com.bsrakdg.mvvmrecipeapp.ui.domain.model
+package com.bsrakdg.mvvmrecipeapp.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

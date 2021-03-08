@@ -1,7 +1,7 @@
-package com.bsrakdg.mvvmrecipeapp.ui.network
+package com.bsrakdg.mvvmrecipeapp.network
 
-import com.bsrakdg.mvvmrecipeapp.ui.network.model.RecipeNetworkEntity
-import com.bsrakdg.mvvmrecipeapp.ui.network.responses.RecipeSearchResponse
+import com.bsrakdg.mvvmrecipeapp.network.model.RecipeDto
+import com.bsrakdg.mvvmrecipeapp.network.responses.RecipeSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -19,5 +19,5 @@ interface RecipeService {
     suspend fun get(
         @Header("Authorization") token: String,
         @Query("id") id: Int
-    ): RecipeNetworkEntity
+    ): RecipeDto
 }
