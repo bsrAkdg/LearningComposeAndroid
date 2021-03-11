@@ -1,4 +1,4 @@
-package com.bsrakdg.mvvmrecipeapp.ui
+package com.bsrakdg.mvvmrecipeapp
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

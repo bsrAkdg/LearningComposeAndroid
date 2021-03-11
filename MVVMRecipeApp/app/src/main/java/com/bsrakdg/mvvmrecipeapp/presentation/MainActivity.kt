@@ -1,9 +1,11 @@
-package com.bsrakdg.mvvmrecipeapp.ui
+package com.bsrakdg.mvvmrecipeapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bsrakdg.mvvmrecipeapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
