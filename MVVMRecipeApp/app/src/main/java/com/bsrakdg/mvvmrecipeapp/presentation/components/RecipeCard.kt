@@ -11,9 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.bsrakdg.mvvmrecipeapp.R
 import com.bsrakdg.mvvmrecipeapp.domain.model.Recipe
 import com.bsrakdg.mvvmrecipeapp.util.DEFAULT_RECIPE_IMAGE
 import com.bsrakdg.mvvmrecipeapp.util.loadPicture
