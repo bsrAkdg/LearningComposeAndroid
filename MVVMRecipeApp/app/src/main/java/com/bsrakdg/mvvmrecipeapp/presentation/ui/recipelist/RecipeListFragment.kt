@@ -1,31 +1,22 @@
 package com.bsrakdg.mvvmrecipeapp.presentation.ui.recipelist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import com.bsrakdg.mvvmrecipeapp.R
-import com.bsrakdg.mvvmrecipeapp.util.Constants.TAG
+import com.bsrakdg.mvvmrecipeapp.domain.model.Recipe
+import com.bsrakdg.mvvmrecipeapp.presentation.components.RecipeCard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecipeListFragment : Fragment() {
 
-    val viewModel: RecipeListViewModel by viewModels()
+    private val viewModel: RecipeListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,25 +27,13 @@ class RecipeListFragment : Fragment() {
             setContent {
 
                 val recipes = viewModel.recipes.value
-                for (recipe in recipes) {
-                    Log.d(TAG, "onCreateView: ${recipe.title}")
-                }
 
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "RecipeList",
-                        style = TextStyle(
-                            fontSize = 21.sp
-                        )
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Button(
-                        onClick = {
-                            findNavController().navigate(R.id.action_recipeListFragment_to_recipeFragment)
-                        }
-                    ) {
-                        Text(text = "TO RECIPE FRAGMENT")
-                    }
+                LazyColumn {
+                     itemsIndexed(
+                         items = recipes
+                     ) { index: Int, recipe: Recipe ->
+                         RecipeCard(recipe = recipe, onClick = {})
+                     }
                 }
             }
         }
