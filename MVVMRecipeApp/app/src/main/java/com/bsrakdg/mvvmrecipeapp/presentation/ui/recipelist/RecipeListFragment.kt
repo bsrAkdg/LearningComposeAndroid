@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -36,7 +38,6 @@ class RecipeListFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-
                 val recipes = viewModel.recipes.value
 
                 //  val query = remember { mutableStateOf("beef")} 1. it will lost when configuration changed
@@ -51,37 +52,50 @@ class RecipeListFragment : Fragment() {
                         color = MaterialTheme.colors.primary,
                         elevation = 8.dp,
                     ) {
-                        Row( // Surface has one child
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            TextField(
-                                modifier = Modifier
-                                    .fillMaxWidth(0.9f) // we need 3 dots icon
-                                    .padding(8.dp),
-                                value = query,
-                                onValueChange = { newValue ->
-                                    viewModel.onQueryChanged(newValue)
-                                },
-                                label = {
-                                    Text(text = "Search") // hint
-                                },
-                                keyboardOptions = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Search
-                                ),
-                                keyboardActions = KeyboardActions(
-                                    onSearch = {
-                                        viewModel.searchRecipes(query = query)
-                                        // close keyboard
-                                    }
-                                ),
-                                leadingIcon = {
-                                    Icon(imageVector = Icons.Filled.Search, contentDescription = "")
-                                },
-                                textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-                                colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface)
-                            )
-            }
+                        Column {
+                            Row( // Surface has one child
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                TextField(
+                                    modifier = Modifier
+                                        .fillMaxWidth(0.9f) // we need 3 dots icon
+                                        .padding(8.dp),
+                                    value = query,
+                                    onValueChange = { newValue ->
+                                        viewModel.onQueryChanged(newValue)
+                                    },
+                                    label = {
+                                        Text(text = "Search") // hint
+                                    },
+                                    keyboardOptions = KeyboardOptions(
+                                        keyboardType = KeyboardType.Text,
+                                        imeAction = ImeAction.Search
+                                    ),
+                                    keyboardActions = KeyboardActions(
+                                        onSearch = {
+                                            viewModel.searchRecipes(query = query)
+                                            // close keyboard
+                                        }
+                                    ),
+                                    leadingIcon = {
+                                        Icon(imageVector = Icons.Filled.Search, contentDescription = "")
+                                    },
+                                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+                                    colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface)
+                                )
+                            }
+
+                            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                                items(getAllFoodCategories()) {
+                                    Text(
+                                        text = it.value,
+                                        style = MaterialTheme.typography.body2,
+                                        color = MaterialTheme.colors.secondary,
+                                        modifier = Modifier.padding(8.dp)
+                                    )
+                                }
+                            }
+                        }
                     }
                     LazyColumn {
                         itemsIndexed(
@@ -94,5 +108,4 @@ class RecipeListFragment : Fragment() {
             }
         }
     }
-
 }
